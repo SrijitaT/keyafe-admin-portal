@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./header.styles.scss";
-import { Link, Redirect } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import { Nav, Navbar, NavbarBrand, Dropdown } from "react-bootstrap";
+import { Nav, Navbar, NavbarBrand } from "react-bootstrap";
 
 export default function Header() {
   let listener = null;
@@ -32,11 +32,11 @@ export default function Header() {
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav className="ms-auto nav-menu">
-          <Nav.Link href="signIn">
-            {/* <Link className="option" to="/signin"> */}
+          <NavLink className="option" to="signin">
+            {/* <Link  to="/signin"> */}
             SIGN IN
             {/* </Link> */}
-          </Nav.Link>
+          </NavLink>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
