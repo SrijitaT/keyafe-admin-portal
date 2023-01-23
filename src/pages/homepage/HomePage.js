@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 
 const HomePage = () => {
+  const ref = React.useRef(null);
+
+  const handleEnded = () => {
+    ref.current.currentTime = 0;
+    ref.current.play();
+  };
   return (
     <div>
-      <video controls width="100%">
-        <source src="/VID-20230123-WA0000.mp4" type="video/mp4" />
-      </video>
+      <video
+        ref={ref}
+        loop
+        controls={false}
+        autoPlay
+        onEnded={handleEnded}
+        src="/VID-20230123-WA0000.mp4"
+        type="video/mp4"
+        style={{
+          width: "100%",
+          height: "50%",
+          objectFit: "cover",
+          overflow: "hidden",
+        }}
+      />
     </div>
   );
 };
