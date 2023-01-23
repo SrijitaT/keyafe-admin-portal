@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
 // import { Link } from "react-router-dom";
 import AdminDashboard from "../../components/admin-dashboard/admin-dashboard.component";
 import ShapePage from "../../pages/dashboard-pages/shape-page/ShapePage";
+import DashboardMenu from "./dashboard-menu/DashboardMenu";
 
 const DashBoard = () => {
   // const { pages } = props.match.params;
@@ -11,7 +12,14 @@ const DashBoard = () => {
       {/* <Link to="/admin-dashboard">
         <AdminDashboard />
       </Link> */}
-      <ShapePage />
+      <Row>
+        <Col lg={3}>
+          <DashboardMenu />
+        </Col>
+        <Col lg={9}>
+          <ShapePage />
+        </Col>
+      </Row>
     </div>
   );
 };
