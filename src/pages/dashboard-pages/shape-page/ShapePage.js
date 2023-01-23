@@ -31,14 +31,12 @@ const ShapePage = () => {
 
   return (
     <div className="shape-page-wrapper">
-      <Row style={{ marginBottom: "20px" }}>
+      <Row className="shape-head">
         <Col md={9} lg={8}>
           <h2>Insert Shape of Product</h2>
         </Col>
         <Col md={3} lg={4}>
-          <Button onClick={() => setToggleShapeForm(true)}>
-            Add new Shape
-          </Button>
+          <Button onClick={() => setToggleShapeForm(true)}>Add</Button>
         </Col>
       </Row>
       <Row>
@@ -59,6 +57,7 @@ const ShapePage = () => {
                     id={id}
                     shape={shape}
                     setShapeList={setShapeList}
+                    shapeList={shapeList}
                   />
                 </>
               );
