@@ -8,7 +8,7 @@ const DashboardMenu = ({ active }) => {
     <div className="dashboard-menu">
       <ul className="dashboard-menu-item nav flex-column nav-pills me-3">
         <li className="nav-link">
-          <Link to="/dashboard/shape" className="dashboard-menu-item-list">
+          <Link to="/shape" className="dashboard-menu-item-list">
             <FaShapes className="dashboard-icons" />{" "}
             <p
               className={
