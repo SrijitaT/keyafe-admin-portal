@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
+import { Row, Col } from "react-bootstrap";
+import SignIn from "../../components/signin-admin/signIn.component";
 
 const HomePage = () => {
-  const ref = React.useRef(null);
+  const ref = useRef(null);
 
   const handleEnded = () => {
     ref.current.currentTime = 0;
@@ -9,21 +11,28 @@ const HomePage = () => {
   };
   return (
     <div>
-      <video
-        ref={ref}
-        loop
-        controls={false}
-        autoPlay
-        onEnded={handleEnded}
-        src="/VID-20230123-WA0000.mp4"
-        type="video/mp4"
-        style={{
-          width: "100%",
-          height: "50%",
-          objectFit: "cover",
-          overflow: "hidden",
-        }}
-      />
+      <Row>
+        <Col md={6} lg={7}>
+          <video
+            ref={ref}
+            loop
+            controls={false}
+            autoPlay
+            onEnded={handleEnded}
+            src="/VID-20230123-WA0000.mp4"
+            type="video/mp4"
+            style={{
+              width: "100%",
+              height: "90%",
+              objectFit: "cover",
+              overflow: "hidden",
+            }}
+          />
+        </Col>
+        <Col md={6} lg={5}>
+          <SignIn />
+        </Col>
+      </Row>
     </div>
   );
 };

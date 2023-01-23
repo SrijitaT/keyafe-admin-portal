@@ -32,9 +32,9 @@ export default function Header() {
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav className="ms-auto nav-menu">
-          <NavLink className="option" to="signin">
+          <NavLink className="option">
             {/* <Link  to="/signin"> */}
-            SIGN IN
+            Hi Admin!
             {/* </Link> */}
           </NavLink>
         </Nav>
