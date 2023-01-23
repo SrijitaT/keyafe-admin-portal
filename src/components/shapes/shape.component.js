@@ -3,11 +3,18 @@ import { MdDeleteForever, MdEditNote } from "react-icons/md";
 import { Row, Col } from "react-bootstrap";
 import "./shape.styles.scss";
 
-const Shape = ({ shape, setShapeList, id, shapeList }) => {
+const Shape = ({ shape, setShapeList, id, shapeList, setEditShapeObject }) => {
   const { name, desc } = shape;
 
   const handleDelete = (id) => {
     setShapeList([...shapeList.slice(0, id), ...shapeList.slice(id + 1)]);
+  };
+
+  const handleEdit = (id) => {
+    setEditShapeObject({
+      ...shapeList[id],
+      index: id,
+    });
   };
 
   return (
@@ -22,7 +29,7 @@ const Shape = ({ shape, setShapeList, id, shapeList }) => {
             <Row>
               <Col lg={6}>
                 <span>
-                  <MdEditNote />
+                  <MdEditNote onClick={() => handleEdit(id)} />
                 </span>
               </Col>
               <Col lg={6}>

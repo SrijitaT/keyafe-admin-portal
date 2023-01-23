@@ -26,8 +26,10 @@ const ShapePage = () => {
   ]);
 
   const [toggleShapeForm, setToggleShapeForm] = useState(false);
-
+  const [editShapeObject, setEditShapeObject] = useState(null);
   const shapeTableHeaders = ["Name", "Description"];
+
+  console.log("edit shape of", editShapeObject);
 
   return (
     <div className="shape-page-wrapper">
@@ -58,6 +60,7 @@ const ShapePage = () => {
                     shape={shape}
                     setShapeList={setShapeList}
                     shapeList={shapeList}
+                    setEditShapeObject={setEditShapeObject}
                   />
                 </>
               );
@@ -65,10 +68,13 @@ const ShapePage = () => {
           </tbody>
         </Table>
       </Row>
-      {toggleShapeForm && (
+      {(toggleShapeForm || editShapeObject) && (
         <AddEditShapeForm
+          shapeList={shapeList}
           setShapeList={setShapeList}
           setToggleShapeForm={setToggleShapeForm}
+          editShapeObject={editShapeObject}
+          setEditShapeObject={setEditShapeObject}
         />
       )}
     </div>

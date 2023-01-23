@@ -8,8 +8,17 @@ const defaultShapeFields = {
   desc: "",
 };
 
-const AddEditShapeForm = ({ setShapeList, setToggleShapeForm }) => {
-  const [formFields, setFormFields] = useState(defaultShapeFields);
+const AddEditShapeForm = ({
+  shapeList,
+  setEditShapeObject,
+  setShapeList,
+  setToggleShapeForm,
+  editShapeObject,
+}) => {
+  const [formFields, setFormFields] = useState(
+    editShapeObject ? editShapeObject : defaultShapeFields
+  );
+  const [shapePatchRequest, setShapePatchRequest] = useState({});
 
   const { name, desc } = formFields;
 
@@ -19,13 +28,29 @@ const AddEditShapeForm = ({ setShapeList, setToggleShapeForm }) => {
       ...formFields,
       [name]: value,
     });
+
+    // if (editShapeObject) {
+    //   setShapePatchRequest((shapePatch) => {
+    //     return {
+    //       ...shapePatch,
+    //       [name]: value,
+    //     };
+    //   });
+    // }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShapeList((shapeList) => {
-      return [...shapeList, formFields];
-    });
+    if (editShapeObject) {
+      const newShapeList = [...shapeList];
+      newShapeList[editShapeObject.index] = formFields;
+      setShapeList(newShapeList);
+    } else {
+      setShapeList((shapeList) => {
+        return [...shapeList, formFields];
+      });
+    }
+    setEditShapeObject(null);
     setToggleShapeForm(false);
   };
 
