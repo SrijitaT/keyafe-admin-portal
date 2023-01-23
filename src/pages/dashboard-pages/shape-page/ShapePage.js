@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import FormInput from "../../../components/form-input/form-input.component";
 import Button from "../../../components/custom-button/custom-button.component";
 import { Row, Col, Table } from "react-bootstrap";
 import Shape from "../../../components/shapes/shape.component";
 import "./shape-page.styles.scss";
+import AddEditShapeForm from "../../../components/shapes/add-edit-shape-form/add-edit-shape-form.component";
 
 const ShapePage = () => {
   const [shapeList, setShapeList] = useState([
@@ -25,6 +25,8 @@ const ShapePage = () => {
     },
   ]);
 
+  const [toggleShapeForm, setToggleShapeForm] = useState(false);
+
   const shapeTableHeaders = ["Name", "Description"];
 
   return (
@@ -34,7 +36,9 @@ const ShapePage = () => {
           <h2>Insert Shape of Product</h2>
         </Col>
         <Col md={3} lg={4}>
-          <Button>Add new Shape</Button>
+          <Button onClick={() => setToggleShapeForm(true)}>
+            Add new Shape
+          </Button>
         </Col>
       </Row>
       <Row>
@@ -62,6 +66,12 @@ const ShapePage = () => {
           </tbody>
         </Table>
       </Row>
+      {toggleShapeForm && (
+        <AddEditShapeForm
+          setShapeList={setShapeList}
+          setToggleShapeForm={setToggleShapeForm}
+        />
+      )}
     </div>
   );
 };
