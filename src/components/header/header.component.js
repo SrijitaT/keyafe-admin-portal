@@ -3,8 +3,10 @@ import "./header.styles.scss";
 import { Link, NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import { Nav, Navbar, NavbarBrand } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Header() {
+  const currentUser = useSelector((state) => state.user.currentUser);
   let listener = null;
   const [scrollState, setScrollState] = useState("header");
 
@@ -32,11 +34,15 @@ export default function Header() {
       <Navbar.Toggle />
       <Navbar.Collapse>
         <Nav className="ms-auto nav-menu">
-          <NavLink className="option">
-            {/* <Link  to="/signin"> */}
-            Hi Admin!
-            {/* </Link> */}
-          </NavLink>
+          {currentUser && (
+            <NavLink className="option">
+              {/* <Link  to="/signin"> */}
+              Hi
+              {currentUser.name.charAt(0).toUpperCase() +
+                currentUser.name.slice(1)}
+              !{/* </Link> */}
+            </NavLink>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

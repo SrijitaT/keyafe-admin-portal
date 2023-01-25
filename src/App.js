@@ -7,16 +7,19 @@ import HomePage from "./pages/homepage/HomePage";
 import AdminDashboard from "./components/admin-dashboard/admin-dashboard.component";
 import DashBoard from "./pages/dashboard-pages/DashBoard";
 import ShapePage from "./pages/dashboard-pages/shape-page/ShapePage";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
+  const currentUser = useSelector((state) => state.user.currentUser);
   return (
     <Container>
       <BrowserRouter>
         <div className="App">
           <Header />
           <Routes>
-            <Route path="/signin" exact element={<SignInAdmin />} />
+            {/* <Route path="/signin" exact element={<SignInAdmin />} /> */}
             <Route path="/" exact element={<HomePage />} />
+
             {/* <Route
               path="/admin-dashboard/:pages"
               exact
