@@ -1,29 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../../components/custom-button/custom-button.component";
 import { Row, Col, Table } from "react-bootstrap";
 import Shape from "../../../components/shapes/shape.component";
 import "./shape-page.styles.scss";
 import AddEditShapeForm from "../../../components/shapes/add-edit-shape-form/add-edit-shape-form.component";
 
+import useFetchData from "../../../custom-hooks/useFetchData";
+
 const ShapePage = () => {
-  const [shapeList, setShapeList] = useState([
-    {
-      name: "Round",
-      desc: "Circular",
-    },
-    {
-      name: "Rectangle",
-      desc: "Rectangular",
-    },
-    {
-      name: "Square",
-      desc: "Square",
-    },
-    {
-      name: "Sphere",
-      desc: "Spherical",
-    },
-  ]);
+  const {
+    data: availableShapeLists,
+    loading,
+    setData,
+  } = useFetchData("shapes");
+
+  console.log(availableShapeLists);
 
   const [toggleShapeForm, setToggleShapeForm] = useState(false);
   const [editShapeObject, setEditShapeObject] = useState(null);
@@ -51,27 +42,30 @@ const ShapePage = () => {
             </tr>
           </thead>
           <tbody>
-            {shapeList.map((shape, id) => {
-              return (
-                <>
-                  <Shape
-                    key={id}
-                    id={id}
-                    shape={shape}
-                    setShapeList={setShapeList}
-                    shapeList={shapeList}
-                    setEditShapeObject={setEditShapeObject}
-                  />
-                </>
-              );
-            })}
+            {!loading &&
+              availableShapeLists &&
+              Array.isArray(availableShapeLists) &&
+              availableShapeLists.map((shape, id) => {
+                return (
+                  <>
+                    <Shape
+                      key={id}
+                      id={id}
+                      shape={shape}
+                      setShapeList={setData}
+                      shapeList={availableShapeLists}
+                      setEditShapeObject={setEditShapeObject}
+                    />
+                  </>
+                );
+              })}
           </tbody>
         </Table>
       </Row>
       {(toggleShapeForm || editShapeObject) && (
         <AddEditShapeForm
-          shapeList={shapeList}
-          setShapeList={setShapeList}
+          shapeList={availableShapeLists}
+          setShapeList={setData}
           setToggleShapeForm={setToggleShapeForm}
           editShapeObject={editShapeObject}
           setEditShapeObject={setEditShapeObject}

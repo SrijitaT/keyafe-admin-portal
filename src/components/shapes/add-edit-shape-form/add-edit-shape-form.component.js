@@ -28,15 +28,6 @@ const AddEditShapeForm = ({
       ...formFields,
       [name]: value,
     });
-
-    // if (editShapeObject) {
-    //   setShapePatchRequest((shapePatch) => {
-    //     return {
-    //       ...shapePatch,
-    //       [name]: value,
-    //     };
-    //   });
-    // }
   };
 
   const handleSubmit = (e) => {
