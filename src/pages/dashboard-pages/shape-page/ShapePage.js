@@ -4,6 +4,8 @@ import { Row, Col, Table } from "react-bootstrap";
 import Shape from "../../../components/shapes/shape.component";
 import "./shape-page.styles.scss";
 import AddEditShapeForm from "../../../components/shapes/add-edit-shape-form/add-edit-shape-form.component";
+import "react-loader-spinner";
+import { Oval } from "react-loader-spinner";
 
 import useFetchData from "../../../custom-hooks/useFetchData";
 
@@ -41,10 +43,10 @@ const ShapePage = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody style={{ position: "relative" }}>
             {!loading &&
-              availableShapeLists &&
-              Array.isArray(availableShapeLists) &&
+            availableShapeLists &&
+            Array.isArray(availableShapeLists) ? (
               availableShapeLists.map((shape, id) => {
                 return (
                   <>
@@ -58,7 +60,23 @@ const ShapePage = () => {
                     />
                   </>
                 );
-              })}
+              })
+            ) : (
+              <div className="shape-loader">
+                <Oval
+                  height={50}
+                  width={50}
+                  color="#4fa94d"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  visible={true}
+                  ariaLabel="oval-loading"
+                  secondaryColor="#4fa94d"
+                  strokeWidth={2}
+                  strokeWidthSecondary={2}
+                />
+              </div>
+            )}
           </tbody>
         </Table>
       </Row>

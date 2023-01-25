@@ -1,8 +1,13 @@
 .shape-page-wrapper {
   max-width: 70%;
   padding: 20px;
+  min-height: 30vw;
   border: 3px solid #000;
   background: rgba(255, 255, 255, 0.5);
+
+  .shape-table {
+    min-height: 20vh;
+  }
 
   .shape-head {
     margin-bottom: 20px;
@@ -11,4 +16,12 @@
       flex-direction: column;
     }
   }
+}
+
+.shape-loader {
+  margin-top: 50px;
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-30%, -50%);
 }

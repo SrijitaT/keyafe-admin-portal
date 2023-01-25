@@ -13,7 +13,7 @@ const DashBoard = () => {
         <AdminDashboard />
       </Link> */}
       <Row>
-        <Col lg={3}>
+        <Col lg={3} style={{ marginBottom: "20px" }}>
           <DashboardMenu />
         </Col>
         <Col lg={9}>
