@@ -6,7 +6,8 @@ import "./shape-page.styles.scss";
 import AddEditShapeForm from "../../../components/shapes/add-edit-shape-form/add-edit-shape-form.component";
 import "react-loader-spinner";
 import { Oval } from "react-loader-spinner";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import useFetchData from "../../../custom-hooks/useFetchData";
 
 const ShapePage = () => {
@@ -47,18 +48,16 @@ const ShapePage = () => {
             {!loading &&
             availableShapeLists &&
             Array.isArray(availableShapeLists) ? (
-              availableShapeLists.map((shape, id) => {
+              availableShapeLists.map((shape, idx) => {
                 return (
-                  <>
-                    <Shape
-                      key={id}
-                      id={id}
-                      shape={shape}
-                      setShapeList={setData}
-                      shapeList={availableShapeLists}
-                      setEditShapeObject={setEditShapeObject}
-                    />
-                  </>
+                  <Shape
+                    key={idx}
+                    id={idx}
+                    shape={shape}
+                    setShapeList={setData}
+                    shapeList={availableShapeLists}
+                    setEditShapeObject={setEditShapeObject}
+                  />
                 );
               })
             ) : (
