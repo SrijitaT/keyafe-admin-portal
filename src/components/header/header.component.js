@@ -27,7 +27,7 @@ export default function Header() {
   return (
     <Navbar className={scrollState} expand="sm" variant="light" sticky="top">
       <NavbarBrand className="logo-container">
-        <Link to="/">
+        <Link to={currentUser ? "/dashboard" : "/"}>
           <img className="logo" src="/images/logo/keyafe.png" alt="logo" />
         </Link>
       </NavbarBrand>
@@ -37,7 +37,7 @@ export default function Header() {
           {currentUser && (
             <NavLink className="option">
               {/* <Link  to="/signin"> */}
-              Hi
+              Hi{" "}
               {currentUser.name.charAt(0).toUpperCase() +
                 currentUser.name.slice(1)}
               !{/* </Link> */}
