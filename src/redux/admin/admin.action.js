@@ -18,3 +18,13 @@ export const emailPhoneSignInStart = (token) => {
     iat,
   });
 };
+
+export const signOutSuccess =
+  (callLogoutApi = true) =>
+  async (dispatch) => {
+    if (callLogoutApi) await axiosInterceptor.post("users/logout");
+    dispatch(createAction(AdminActionTypes.SIGN_OUT_SUCCESS));
+  };
+
+export const setCurrentUser = (user) =>
+  createAction(AdminActionTypes.SET_CURRENT_ADMIN, user);

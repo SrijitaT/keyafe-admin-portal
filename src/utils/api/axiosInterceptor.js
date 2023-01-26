@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import { signOutSuccess } from "../../redux/admin/admin.action";
+import { store } from "../../redux/store";
 const axiosInterceptor = axios.create({
   baseURL: "https://localhost:5001/api/",
   withCredentials: true,
@@ -13,13 +14,13 @@ axiosInterceptor.interceptors.response.use(
   (error) => {
     console.log("error message", error.response);
 
-    // if (
-    //   error.response.status === 401 ||
-    //   error.response.data.message === "Invalid Token" ||
-    //   error.response.data.message === "Token Needed"
-    // ) {
-    //   store.dispatch(signOutSuccess(false));
-    // }
+    if (
+      error.response.status === 401 ||
+      error.response.data.message === "Invalid Token" ||
+      error.response.data.message === "Token Needed"
+    ) {
+      store.dispatch(signOutSuccess(false));
+    }
     return Promise.reject(error.response);
   }
 );

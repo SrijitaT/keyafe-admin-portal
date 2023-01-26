@@ -15,19 +15,19 @@ const HomePage = () => {
         <Col md={6} lg={7}>
           <video
             ref={ref}
-            loop
+            loop={true}
             controls={false}
             autoPlay
             onEnded={handleEnded}
-            src="/VID-20230123-WA0000.mp4"
-            type="video/mp4"
             style={{
               width: "100%",
               height: "90%",
               objectFit: "cover",
               overflow: "hidden",
             }}
-          />
+          >
+            <source src="/VID-20230123-WA0000.mp4" type="video/mp4" />
+          </video>
         </Col>
         <Col md={6} lg={5}>
           <SignIn />
