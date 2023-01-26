@@ -12,7 +12,7 @@ const useFetchData = (url, params, dependency) => {
         try {
           const response = await axiosInterceptor.get(url, params);
           if (isMounted) {
-            setData(response.data);
+            setData(response.data.data);
           }
           console.log("data", response.data);
         } catch (error) {

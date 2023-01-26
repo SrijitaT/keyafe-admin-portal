@@ -20,6 +20,8 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { email_id, password } = formFields;
 
+  const resetFormFields = () => setFormFields(defaultFormFields);
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const navigate = useNavigate();
@@ -41,27 +43,20 @@ const SignIn = () => {
         }
       );
 
-      const { type, token } = response;
+      const { token } = response.data;
       console.log("sign in response", response);
-      if (type == "success") {
+      if (response.status == 200) {
         dispatch(emailPhoneSignInStart(token));
         console.log("token", decryptToken(token));
         setIsLoading(false);
         navigate("/dashboard");
       } else {
         alert("Only admins are allowed to login");
+        setIsLoading(false);
       }
     } catch (error) {
-      switch (error.code) {
-        case "auth/wrong-password":
-          alert("incorrect password for email");
-          break;
-        case "auth/user-not-found":
-          alert("Only admins are allowed to login");
-          break;
-        default:
-          console.log(error);
-      }
+      setIsLoading(false);
+      resetFormFields();
     }
   };
 
