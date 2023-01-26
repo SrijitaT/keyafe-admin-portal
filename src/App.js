@@ -19,8 +19,8 @@ function App() {
           <Routes>
             <Route path="/" exact element={<HomePage />} />
             <Route
-              path={currentUser ? "/" : "/dashboard"}
-              element={currentUser ? <HomePage /> : <DashBoard />}
+              path={currentUser ? "/dashboard" : "/"}
+              element={currentUser ? <DashBoard /> : <HomePage />}
             />
 
             <Route path="/shape" exact element={<ShapePage />} />
