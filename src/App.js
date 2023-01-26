@@ -22,7 +22,7 @@ function App() {
   }
 
   return (
-    <Container>
+    <Container fluid>
       <BrowserRouter>
         <div className="App">
           <Header />
