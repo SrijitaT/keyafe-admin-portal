@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 // import { Link } from "react-router-dom";
 import AdminDashboard from "../../components/admin-dashboard/admin-dashboard.component";
+import Sidenav from "../../components/sidenav/sidenav.component";
 import ShapePage from "../../pages/dashboard-pages/shape-page/ShapePage";
 import DashboardMenu from "./dashboard-menu/DashboardMenu";
 
@@ -14,10 +15,10 @@ const DashBoard = () => {
       </Link> */}
       <Row>
         <Col lg={3} style={{ marginBottom: "20px" }}>
-          <DashboardMenu />
+          <Sidenav />
         </Col>
         <Col lg={9}>
-          <ShapePage />
+          <h1>Welcome to Admin Portal</h1>
         </Col>
       </Row>
     </div>

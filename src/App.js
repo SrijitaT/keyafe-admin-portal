@@ -28,19 +28,6 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" exact element={<HomePage />} />
-            {/* <Route
-              path={currentUser ? "/dashboard" : "/"}
-              element={
-                currentUser ? (
-                  <ProtectedRoute>
-                    <DashBoard />
-                  </ProtectedRoute>
-                ) : (
-                  <HomePage />
-                )
-              }
-            /> */}
-
             <Route path="/shape" exact element={<ShapePage />} />
             <Route
               path="/dashboard"
