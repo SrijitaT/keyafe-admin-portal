@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Sidenav, Nav } from "rsuite";
@@ -6,15 +6,17 @@ import { Sidenav, Nav } from "rsuite";
 import "rsuite/dist/rsuite.min.css"; // or
 
 const SideNavBar = () => {
+  const [expanded, setExpanded] = useState(true);
+  console.log("sidenav state", expanded);
   return (
-    <div style={{ width: 240 }}>
-      <Sidenav defaultOpenKeys={["3", "4"]}>
+    <div className="sidebar-main-wrapper">
+      <Sidenav expanded={expanded} appearance="subtle">
         <Sidenav.Body>
           <Nav activeKey="1">
-            <Nav.Item eventKey="1">
+            <Nav.Item eventKey="1">DashBoard</Nav.Item>
+            <Nav.Item eventKey="2">
               <Link to="/shape">Shape</Link>
             </Nav.Item>
-            <Nav.Item eventKey="2">User Group</Nav.Item>
             <Nav.Menu eventKey="3" title="Advanced">
               <Nav.Item eventKey="3-1">Geo</Nav.Item>
               <Nav.Item eventKey="3-2">Devices</Nav.Item>
@@ -32,6 +34,7 @@ const SideNavBar = () => {
             </Nav.Menu>
           </Nav>
         </Sidenav.Body>
+        <Sidenav.Toggle onToggle={(expanded) => setExpanded(expanded)} />
       </Sidenav>
     </div>
   );

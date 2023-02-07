@@ -1,6 +1,8 @@
 import axios from "axios";
+import Error403 from "../../components/error-pages-list/error403/error-403.component";
 import { signOutSuccess } from "../../redux/admin/admin.action";
 import { store } from "../../redux/store";
+
 const axiosInterceptor = axios.create({
   baseURL: "https://localhost:5001/api/",
   withCredentials: true,
@@ -20,7 +22,7 @@ axiosInterceptor.interceptors.response.use(
       error.response.data.message === "Invalid Token" ||
       error.response.data.message === "Token Needed"
     ) {
-      alert("Incorrect credentials / need admin rights to login");
+      // alert("Incorrect credentials / need admin rights to login");
       store.dispatch(signOutSuccess(false));
     }
     return Promise.reject(error.response);

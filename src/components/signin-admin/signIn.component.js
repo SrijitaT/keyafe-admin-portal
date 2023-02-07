@@ -55,6 +55,7 @@ const SignIn = () => {
         setIsLoading(false);
       }
     } catch (error) {
+      console.log("error", error);
       setIsLoading(false);
       resetFormFields();
     }
