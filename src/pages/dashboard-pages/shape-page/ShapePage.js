@@ -18,7 +18,7 @@ const ShapePage = () => {
     setData,
   } = useFetchData("shapes");
 
-  console.log(availableShapeLists);
+  console.log(availableShapeLists.data);
 
   const [toggleShapeForm, setToggleShapeForm] = useState(false);
   const [editShapeObject, setEditShapeObject] = useState(null);

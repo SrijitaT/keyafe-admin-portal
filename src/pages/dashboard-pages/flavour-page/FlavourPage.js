@@ -4,6 +4,7 @@ import { Row, Col, Table } from "react-bootstrap";
 import useFetchData from "../../../custom-hooks/useFetchData";
 import Button from "../../../components/custom-button/custom-button.component";
 import "./flavour-page.styles.scss";
+import Flavour from "../../../components/flavours/flavour.component";
 
 const FlavourPage = () => {
   const [toggleFlavourForm, setToggleFlavourForm] = useState(false);
@@ -22,6 +23,9 @@ const FlavourPage = () => {
             <Col md={3} lg={4}>
               <Button onClick={() => setToggleFlavourForm(true)}>Add</Button>
             </Col>
+          </Row>
+          <Row>
+            <Flavour />
           </Row>
         </div>
       </Col>

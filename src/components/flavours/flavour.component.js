@@ -1,32 +1,72 @@
-import React from "react";
-import "rsuite/dist/rsuite.min.css";
-import { Table } from "rsuite";
+import React, { useEffect, useState } from "react";
+import { Row, Col, Table } from "react-bootstrap";
 import useFetchData from "../../custom-hooks/useFetchData";
-
-const { Column, HeaderCell, Cell } = Table;
+import { isEmpty } from "lodash";
+import FlavourBody from "./flavour-table.component";
+import { Icon } from "@iconify/react";
+import axiosInterceptor from "../../utils/api/axiosInterceptor";
 
 const Flavour = () => {
   const flavourTableHeaders = ["Variety", "descriptions"];
-  const { data: flavourData, loading } = useFetchData("flavours");
+  //   const [loading, setLoading] = useState(false);
+  const flavourData = useFetchData("flavours");
 
-  console.log("flavours", flavourData);
+  const { data, loading, setData } = flavourData ? flavourData : {};
+
+  console.log("list of available flavours", flavourData);
   return (
-    <Table
-      height={400}
-      data={flavourData}
-      onRowClick={(rowData) => {
-        console.log(rowData);
-      }}
-    >
-      {flavourTableHeaders.map((flavourHead, idx) => {
-        return (
-          <Column width={150} key={idx}>
-            <HeaderCell>flavourHead</HeaderCell>
-            <Cell dataKey={`${flavourHead}`} />
-          </Column>
-        );
-      })}
-    </Table>
+    <>
+      {loading ? (
+        <Icon
+          icon="eos-icons:bubble-loading"
+          color="black"
+          width="20"
+          height="20"
+        />
+      ) : (
+        <Row>
+          <Table responsive hover bordered className="flavour-table">
+            <thead>
+              <tr
+                style={{
+                  textAlign: "center",
+                  height: "50px",
+                }}
+              >
+                {flavourTableHeaders.map((flavourHead, idx) => (
+                  <th style={{ height: "50px" }} key={idx}>
+                    {" "}
+                    {flavourHead}{" "}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody style={{ position: "relative" }}>
+              {loading && !Array.isArray(data) ? (
+                <Icon
+                  icon="eos-icons:bubble-loading"
+                  color="black"
+                  width="20"
+                  height="20"
+                />
+              ) : (
+                Array.isArray(data) &&
+                flavourData &&
+                data.map((flavour, idx) => {
+                  return (
+                    <FlavourBody
+                      key={idx}
+                      flavour={flavour}
+                      setData={setData}
+                    />
+                  );
+                })
+              )}
+            </tbody>
+          </Table>
+        </Row>
+      )}
+    </>
   );
 };
 

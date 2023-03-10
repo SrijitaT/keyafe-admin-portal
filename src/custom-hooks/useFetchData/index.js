@@ -14,7 +14,8 @@ const useFetchData = (url, params, dependency) => {
           if (isMounted) {
             setData(response.data.data);
           }
-          console.log("data", response.data);
+          console.log("data", response.data.data);
+          console.log(" in useFetchdata", data);
         } catch (error) {
           console.error(error);
         }
