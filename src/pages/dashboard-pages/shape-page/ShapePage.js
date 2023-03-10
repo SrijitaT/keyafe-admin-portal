@@ -42,7 +42,7 @@ const ShapePage = () => {
             </Col>
           </Row>
           <Row>
-            <Table responsive hover bordered className="shape-table">
+            <Table responsive className="shape-table">
               <thead>
                 <tr style={{ textAlign: "center" }}>
                   {shapeTableHeaders.map((header, idx) => (

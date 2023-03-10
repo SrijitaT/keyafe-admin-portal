@@ -17,6 +17,9 @@ const SideNavBar = () => {
             <Nav.Item eventKey="2">
               <Link to="/shape">Shape</Link>
             </Nav.Item>
+            <Nav.Item eventKey="3">
+              <Link to="/flavour">Flavour</Link>
+            </Nav.Item>
             <Nav.Menu eventKey="3" title="Advanced">
               <Nav.Item eventKey="3-1">Geo</Nav.Item>
               <Nav.Item eventKey="3-2">Devices</Nav.Item>
