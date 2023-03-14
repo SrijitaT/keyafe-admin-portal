@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Table } from "react-bootstrap";
 import { Icon } from "@iconify/react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ProductBody from "./product-body.component";
 
 const ProductsTable = ({ products }) => {
   const productTableHeaders = [
@@ -42,6 +43,11 @@ const ProductsTable = ({ products }) => {
                 ))}
               </tr>
             </thead>
+            <tbody style={{ position: "relative" }}>
+              {products.map((product, idx) => {
+                return <ProductBody key={idx} product={product} />;
+              })}
+            </tbody>
           </Table>
         </Row>
       )}
