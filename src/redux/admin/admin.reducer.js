@@ -18,6 +18,7 @@ const adminReducer = (state = INITIAL_STATE, action = {}) => {
         currentUser: payload,
       };
     case AdminActionTypes.SIGN_OUT_SUCCESS:
+      window.localStorage.removeItem("userToken");
       return {
         ...state,
         currentUser: null,

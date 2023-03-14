@@ -5,6 +5,7 @@ import decryptToken from "../../utils/token-decryption/decryptToken";
 import axiosInterceptor from "../../utils/api/axiosInterceptor";
 
 export const emailPhoneSignInStart = (token) => {
+  window.localStorage.setItem("userToken", token);
   const decodedToken = decryptToken(token);
   console.log("token", decodedToken);
   const { email_id, name, phone, uid, id, exp, iat } = decodedToken;

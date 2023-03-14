@@ -5,8 +5,8 @@ import { Sidenav, Nav } from "rsuite";
 import "./sidenav.styles.scss";
 import "rsuite/dist/rsuite.min.css"; // or
 
-const SideNavBar = ({ expanded, setExpanded }) => {
-  // const [expanded, setExpanded] = useState(true);
+const SideNavBar = () => {
+  const [expanded, setExpanded] = useState(true);
   console.log("sidenav state", expanded);
   return (
     <div>
@@ -18,14 +18,32 @@ const SideNavBar = ({ expanded, setExpanded }) => {
         <Sidenav.Body>
           <Nav activeKey="1">
             <Nav.Item eventKey="1">
-              <Link to="/dashboard">DashBoard</Link>
+              <Link
+                to="/dashboard"
+                style={{ color: "#000", textDecoration: "none" }}
+              >
+                DashBoard
+              </Link>
             </Nav.Item>
+            {/* <hr /> */}
             <Nav.Item eventKey="2">
-              <Link to="/shape">Shape</Link>
+              <Link
+                to="/shape"
+                style={{ color: "#000", textDecoration: "none" }}
+              >
+                Shape
+              </Link>
             </Nav.Item>
+            {/* <hr /> */}
             <Nav.Item eventKey="3">
-              <Link to="/flavour">Flavour</Link>
+              <Link
+                to="/flavour"
+                style={{ color: "#000", textDecoration: "none" }}
+              >
+                Flavour
+              </Link>
             </Nav.Item>
+            {/* <hr /> */}
           </Nav>
         </Sidenav.Body>
         <Sidenav.Toggle onToggle={(expanded) => setExpanded(expanded)} />
