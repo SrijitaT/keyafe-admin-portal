@@ -83,7 +83,9 @@ const AddEditShapeForm = ({
         />
         <FormInput
           label="Shape Description"
-          type="text"
+          type="textarea"
+          rows="5"
+          cols="35"
           required
           onChange={handleChange}
           name="desc"
