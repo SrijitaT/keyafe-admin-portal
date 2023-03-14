@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Table } from "react-bootstrap";
-import useFetchData from "../../custom-hooks/useFetchData";
+
 import { Icon } from "@iconify/react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form } from "react-bootstrap";
 import axiosInterceptor from "../../utils/api/axiosInterceptor";
+import ProductsTable from "./products-table.component";
 
 const Product = () => {
   const [categoryName, setCategoryName] = useState("");
+  const [products, setProducts] = useState([]);
 
   const categoryList = [
     "Cookies",
@@ -21,15 +23,14 @@ const Product = () => {
     setCategoryName(e.target.value);
   };
 
-  //   const { data, loading } = useFetchData(`/products/${categoryName}?page=1`);
-
-  //   console.log("list of available products for this category", data);
-
   const getProductList = async () => {
     const { data: productList } = await axiosInterceptor.get(
       `/products/${categoryName}?page=1`
     );
-    console.log("fetching product data", productList);
+    console.log("fetching product data", productList?.data?.records);
+    if (productList?.data?.records) {
+      setProducts([...productList?.data?.records]);
+    }
   };
 
   useEffect(() => {
@@ -37,18 +38,28 @@ const Product = () => {
     getProductList();
   }, [categoryName]);
 
+  console.log("Product array", Array.isArray(products) ? products : []);
+
   return (
     <div>
-      <Form.Select
-        className="product-form"
-        name="category_name"
-        onChange={handleChange}
-      >
-        {/* <option>Select Product category</option> */}
-        {categoryList.map((item) => (
-          <option value={item}> {item} </option>
-        ))}
-      </Form.Select>
+      <Row style={{ marginBottom: "15px" }}>
+        <Col lg={6}>
+          <Form.Select
+            className="product-form"
+            name="category_name"
+            onChange={handleChange}
+          >
+            {/* <option>Select Product category</option> */}
+            {categoryList.map((item) => (
+              <option value={item}> {item} </option>
+            ))}
+          </Form.Select>
+        </Col>
+        <Col lg={6}></Col>
+      </Row>
+      <Row>
+        <ProductsTable products={products} />
+      </Row>
     </div>
   );
 };
