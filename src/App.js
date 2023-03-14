@@ -12,6 +12,7 @@ import Error404 from "./components/error-pages-list/error404/error-404.component
 import Error403 from "./components/error-pages-list/error403/error-403.component";
 import Error500 from "./components/error-pages-list/error500/error500.component";
 import FlavourPage from "./pages/dashboard-pages/flavour-page/FlavourPage";
+import ProductPage from "./pages/dashboard-pages/product-page/ProductPage";
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -34,6 +35,7 @@ function App() {
             <Route path="/" exact element={<HomePage />} />
             <Route path="/shape" exact element={<ShapePage />} />
             <Route path="/flavour" element={<FlavourPage />} />
+            <Route path="/product" element={<ProductPage />} />
             <Route
               path="/dashboard"
               exact

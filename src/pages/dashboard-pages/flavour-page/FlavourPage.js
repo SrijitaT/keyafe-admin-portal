@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SideNavBar from "../../../components/sidenav/sidenav.component";
 import { Row, Col, Table } from "react-bootstrap";
-import useFetchData from "../../../custom-hooks/useFetchData";
+
 import Button from "../../../components/custom-button/custom-button.component";
 import "./flavour-page.styles.scss";
 import Flavour from "../../../components/flavours/flavour.component";

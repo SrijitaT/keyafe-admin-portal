@@ -1,0 +1,20 @@
+.product-page-wrapper {
+  max-width: 70%;
+  padding: 20px;
+  min-height: 30vw;
+  border: 3px solid #000;
+  background: rgba(255, 255, 255, 0.5);
+
+  .product-table {
+    min-height: 20vh;
+  }
+
+  .product-head {
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 999px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

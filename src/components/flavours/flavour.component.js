@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Table } from "react-bootstrap";
 import useFetchData from "../../custom-hooks/useFetchData";
-import { isEmpty } from "lodash";
+
 import FlavourBody from "./flavour-table.component";
 import { Icon } from "@iconify/react";
-import axiosInterceptor from "../../utils/api/axiosInterceptor";
 
 const Flavour = () => {
   const flavourTableHeaders = ["Variety", "descriptions"];

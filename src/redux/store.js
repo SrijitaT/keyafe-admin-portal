@@ -1,4 +1,4 @@
-import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 import { persistStore } from "redux-persist";
@@ -6,7 +6,6 @@ import { persistStore } from "redux-persist";
 import rootReducer from "./root-reducer";
 
 const middlewares = [thunk, logger];
-const middlewareEnhancer = applyMiddleware(...middlewares);
 
 export const store = configureStore({
   reducer: rootReducer,
