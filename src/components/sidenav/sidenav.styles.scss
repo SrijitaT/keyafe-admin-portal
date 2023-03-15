@@ -1,4 +1,20 @@
 .sidebar-main-wrapper {
   border: 1px solid #ef5aff;
-  background: rgba(206, 163, 199, 0.811);
+  .sidenav-body {
+    background: rgb(255, 255, 255);
+  }
+  .sidenav-items {
+    background: rgb(255, 255, 255);
+    a {
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .sidenav-active-item {
+      color: #000;
+      text-decoration: none;
+      background: rgba(214, 67, 190, 0.811);
+      font-weight: bold;
+    }
+  }
 }

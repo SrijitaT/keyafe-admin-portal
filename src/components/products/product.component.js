@@ -35,6 +35,7 @@ const Product = () => {
 
   useEffect(() => {
     console.log("selected category", categoryName);
+
     getProductList();
   }, [categoryName]);
 
@@ -49,6 +50,7 @@ const Product = () => {
             name="category_name"
             onChange={handleChange}
           >
+            {/* <option value="default">Select a category</option> */}
             {/* <option>Select Product category</option> */}
             {categoryList.map((item) => (
               <option value={item}> {item} </option>

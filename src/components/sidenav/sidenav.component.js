@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import ShapeIcon from "@rsuite/icons/legacy/Shapes";
@@ -10,7 +10,13 @@ import "rsuite/dist/rsuite.min.css"; // or
 
 const SideNavBar = () => {
   const [expanded, setExpanded] = useState(true);
+  const [menuSelected, setMenuSelected] = useState("");
   console.log("sidenav state", expanded);
+
+  useEffect(() => {
+    console.log("menu selected", menuSelected);
+  }, [menuSelected]);
+
   return (
     <div>
       <Sidenav
@@ -18,39 +24,60 @@ const SideNavBar = () => {
         // appearance="inverse"
         className="sidebar-main-wrapper"
       >
-        <Sidenav.Body>
-          <Nav activeKey="1">
-            <Nav.Item eventKey="1" icon={<DashboardIcon />}>
+        <Sidenav.Body className="sidenav-body">
+          <Nav activeKey="1" className="sidenav-items">
+            <Nav.Item
+              eventKey="1"
+              className={
+                menuSelected == "dashboard"
+                  ? "sidenav-active-item"
+                  : "sidenav-item"
+              }
+              icon={<DashboardIcon />}
+            >
               <Link
                 to="/dashboard"
-                style={{ color: "#000", textDecoration: "none" }}
+                onClick={() => setMenuSelected("dashboard")}
               >
                 DashBoard
               </Link>
             </Nav.Item>
             {/* <hr /> */}
-            <Nav.Item eventKey="2" icon={<ShapeIcon />}>
-              <Link
-                to="/shape"
-                style={{ color: "#000", textDecoration: "none" }}
-              >
+            <Nav.Item
+              eventKey="2"
+              className={
+                menuSelected == "shape" ? "sidenav-active-item" : "sidenav-item"
+              }
+              icon={<ShapeIcon />}
+            >
+              <Link to="/shape" onClick={() => setMenuSelected("shape")}>
                 Shape
               </Link>
             </Nav.Item>
             {/* <hr /> */}
-            <Nav.Item eventKey="3" icon={<FlavourIcon />}>
-              <Link
-                to="/flavour"
-                style={{ color: "#000", textDecoration: "none" }}
-              >
+            <Nav.Item
+              eventKey="3"
+              className={
+                menuSelected == "flavour"
+                  ? "sidenav-active-item"
+                  : "sidenav-item"
+              }
+              icon={<FlavourIcon />}
+            >
+              <Link to="/flavour" onClick={() => setMenuSelected("flavour")}>
                 Flavour
               </Link>
             </Nav.Item>
-            <Nav.Item eventKey="4" icon={<ProductIcon />}>
-              <Link
-                to="/product"
-                style={{ color: "#000", textDecoration: "none" }}
-              >
+            <Nav.Item
+              eventKey="4"
+              className={
+                menuSelected == "product"
+                  ? "sidenav-active-item"
+                  : "sidenav-item"
+              }
+              icon={<ProductIcon />}
+            >
+              <Link to="/product" onClick={() => setMenuSelected("product")}>
                 Product
               </Link>
             </Nav.Item>
