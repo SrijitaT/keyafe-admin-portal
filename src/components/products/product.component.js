@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Table } from "react-bootstrap";
+import { Row, Col, Table, Form } from "react-bootstrap";
 
-import { Icon } from "@iconify/react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Form } from "react-bootstrap";
 import axiosInterceptor from "../../utils/api/axiosInterceptor";
 import ProductsTable from "./products-table.component";
+import { getProductCategory } from "../../redux/products/product.action";
+import { useDispatch, useSelector } from "react-redux";
 
 const Product = () => {
   const [categoryName, setCategoryName] = useState("");
   const [products, setProducts] = useState([]);
 
-  const categoryList = [
-    "Cookies",
-    "Celebration cakes",
-    "Dry cake",
-    "Savoury items(Snacks)",
-    "Pizza and Breads",
-  ];
+  const categoryList = useSelector((state) => state.product.categoryList);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("getting category list...");
+    dispatch(getProductCategory());
+  }, []);
+
+  // const categoryList = [
+  //   "Cookies",
+  //   "Celebration cakes",
+  //   "Dry cake",
+  //   "Savoury items(Snacks)",
+  //   "Pizza and Breads",
+  // ];
 
   const handleChange = (e) => {
     setCategoryName(e.target.value);
@@ -40,6 +48,7 @@ const Product = () => {
   }, [categoryName]);
 
   console.log("Product array", Array.isArray(products) ? products : []);
+  console.log("category list", categoryList);
 
   return (
     <div>
@@ -52,9 +61,14 @@ const Product = () => {
           >
             {/* <option value="default">Select a category</option> */}
             {/* <option>Select Product category</option> */}
-            {categoryList.map((item) => (
-              <option value={item}> {item} </option>
-            ))}
+            {categoryList &&
+              Array.isArray(categoryList) &&
+              categoryList.map((item) => (
+                <option key={item.id} value={item}>
+                  {" "}
+                  {item.name}{" "}
+                </option>
+              ))}
           </Form.Select>
         </Col>
         <Col lg={6}></Col>
