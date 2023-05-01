@@ -6,14 +6,14 @@ import ProductBody from "./product-body.component";
 
 const ProductsTable = ({ products }) => {
   const productTableHeaders = [
-    "Product_Id",
+    "Product ID",
     "Image",
     "Product Title",
-    "Category_Id",
-    "Type_Id",
-    "Product_Details_Id",
-    "Shape_Id",
-    "Original_Flavour_Id",
+    "Unit Price (Rs)",
+    "Discounted Price (Rs)",
+    // "Product_Details_Id",
+    // "Shape_Id",
+    // "Original_Flavour_Id",
   ];
 
   return (
