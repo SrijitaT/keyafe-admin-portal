@@ -17,6 +17,19 @@ const productReducer = (state = INITIAL_STATE, action = {}) => {
         categoryList: [...payload],
       };
 
+<<<<<<< Updated upstream
+=======
+    case ProductActionTypes.SET_PRODUCT_TYPE:
+      return {
+        ...state,
+        typeList: [...payload],
+      };
+    case ProductActionTypes.UPDATE_PRODUCT_SHAPE:
+      return {
+        ...state,
+        shapeList: [...payload],
+      };
+>>>>>>> Stashed changes
     default:
       return state;
   }
