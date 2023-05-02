@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAvailableShapes } from "../../../redux/products/product.action";
 import Button from "../../../components/custom-button/custom-button.component";
 import { Row, Col, Table } from "react-bootstrap";
 import Shape from "../../../components/shapes/shape.component";
@@ -6,19 +8,20 @@ import "./shape-page.styles.scss";
 import AddEditShapeForm from "../../../components/shapes/add-edit-shape-form/add-edit-shape-form.component";
 import "react-loader-spinner";
 import { Oval } from "react-loader-spinner";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import useFetchData from "../../../custom-hooks/useFetchData";
 import SideNavBar from "../../../components/sidenav/sidenav.component";
 
 const ShapePage = () => {
-  const {
-    data: availableShapeLists,
-    loading,
-    setData,
-  } = useFetchData("shapes");
+  const dispatch = useDispatch();
 
-  console.log(availableShapeLists.data);
+  useEffect(() => {
+    dispatch(getAvailableShapes());
+  }, []);
+
+  const shapeListing = useSelector((state) => state.product.shapeList);
+
+  const [shapeList, setShapeList] = useState(shapeListing);
+
+  console.log("list of shapes", shapeListing);
 
   const [toggleShapeForm, setToggleShapeForm] = useState(false);
   const [editShapeObject, setEditShapeObject] = useState(null);
@@ -42,53 +45,68 @@ const ShapePage = () => {
             </Col>
           </Row>
           <Row>
-            <Table responsive className="shape-table">
-              <thead>
-                <tr style={{ textAlign: "center" }}>
-                  {shapeTableHeaders.map((header, idx) => (
-                    <th key={idx}>{header}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody style={{ position: "relative" }}>
-                {!loading &&
-                availableShapeLists &&
-                Array.isArray(availableShapeLists) ? (
-                  availableShapeLists.map((shape, idx) => {
-                    return (
-                      <Shape
-                        key={idx}
-                        id={idx}
-                        shape={shape}
-                        setShapeList={setData}
-                        shapeList={availableShapeLists}
-                        setEditShapeObject={setEditShapeObject}
+            {shapeListing && Array.isArray(shapeListing) ? (
+              <Table responsive className="shape-table">
+                <thead>
+                  <tr style={{ textAlign: "center" }}>
+                    {shapeTableHeaders.map((header, idx) => (
+                      <th key={idx}>{header}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody style={{ position: "relative" }}>
+                  {shapeListing && Array.isArray(shapeListing) ? (
+                    shapeListing.map((shape, idx) => {
+                      return (
+                        <Shape
+                          key={idx}
+                          id={idx}
+                          shape={shape}
+                          setShapeList={setShapeList}
+                          shapeList={shapeList}
+                          setEditShapeObject={setEditShapeObject}
+                        />
+                      );
+                    })
+                  ) : (
+                    <div className="shape-loader">
+                      <Oval
+                        height={50}
+                        width={50}
+                        color="#4fa94d"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                        ariaLabel="oval-loading"
+                        secondaryColor="#4fa94d"
+                        strokeWidth={2}
+                        strokeWidthSecondary={2}
                       />
-                    );
-                  })
-                ) : (
-                  <div className="shape-loader">
-                    <Oval
-                      height={50}
-                      width={50}
-                      color="#4fa94d"
-                      wrapperStyle={{}}
-                      wrapperClass=""
-                      visible={true}
-                      ariaLabel="oval-loading"
-                      secondaryColor="#4fa94d"
-                      strokeWidth={2}
-                      strokeWidthSecondary={2}
-                    />
-                  </div>
-                )}
-              </tbody>
-            </Table>
+                    </div>
+                  )}
+                </tbody>
+              </Table>
+            ) : (
+              <div className="shape-loader">
+                <Oval
+                  height={50}
+                  width={50}
+                  color="#4fa94d"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  visible={true}
+                  ariaLabel="oval-loading"
+                  secondaryColor="#4fa94d"
+                  strokeWidth={2}
+                  strokeWidthSecondary={2}
+                />
+              </div>
+            )}
           </Row>
           {(toggleShapeForm || editShapeObject) && (
             <AddEditShapeForm
-              shapeList={availableShapeLists}
-              setShapeList={setData}
+              shapeList={shapeList}
+              setShapeList={setShapeList}
               setToggleShapeForm={setToggleShapeForm}
               editShapeObject={editShapeObject}
               setEditShapeObject={setEditShapeObject}

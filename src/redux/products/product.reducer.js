@@ -16,6 +16,17 @@ const productReducer = (state = INITIAL_STATE, action = {}) => {
         ...state,
         categoryList: [...payload],
       };
+    case ProductActionTypes.SET_PRODUCT_FLAVOUR:
+      return {
+        ...state,
+        flavourList: [...payload],
+      };
+
+    case ProductActionTypes.SET_PRODUCT_SHAPE:
+      return {
+        ...state,
+        shapeList: [...payload],
+      };
 
 <<<<<<< Updated upstream
 =======

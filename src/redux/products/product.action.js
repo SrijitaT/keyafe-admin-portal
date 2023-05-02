@@ -2,7 +2,6 @@ import { ProductActionTypes } from "./product.types";
 
 import axiosInterceptor from "../../utils/api/axiosInterceptor";
 import { createAction } from "../utils/reducer.utils";
-import { useSelector } from "react-redux";
 
 export const getProductCategory = () => async (dispatch) => {
   //   let categoryListing = useSelector((state) => state.categoryList);
