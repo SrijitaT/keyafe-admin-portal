@@ -28,8 +28,6 @@ const productReducer = (state = INITIAL_STATE, action = {}) => {
         shapeList: [...payload],
       };
 
-<<<<<<< Updated upstream
-=======
     case ProductActionTypes.SET_PRODUCT_TYPE:
       return {
         ...state,
@@ -40,7 +38,6 @@ const productReducer = (state = INITIAL_STATE, action = {}) => {
         ...state,
         shapeList: [...payload],
       };
->>>>>>> Stashed changes
     default:
       return state;
   }

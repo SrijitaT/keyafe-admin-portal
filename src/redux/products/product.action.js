@@ -15,8 +15,6 @@ export const getProductCategory = () => async (dispatch) => {
     createAction(ProductActionTypes.SET_PRODUCT_CATEGORY, response.data.data)
   );
 };
-<<<<<<< Updated upstream
-=======
 
 export const getAvailableFlavour = () => async (dispatch) => {
   const response = await axiosInterceptor.get("flavours");
@@ -62,4 +60,3 @@ export const updateProductShape =
       );
     }
   };
->>>>>>> Stashed changes
