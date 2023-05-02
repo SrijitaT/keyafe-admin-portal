@@ -5,27 +5,11 @@ import axiosInterceptor from "../../utils/api/axiosInterceptor";
 import ProductsTable from "./products-table.component";
 import { getProductCategory } from "../../redux/products/product.action";
 import { useDispatch, useSelector } from "react-redux";
+import CategoryListing from "../category-listing";
 
 const Product = () => {
   const [categoryName, setCategoryName] = useState("");
   const [products, setProducts] = useState([]);
-
-  const categoryList = useSelector((state) => state.product.categoryList);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log("getting category list...");
-    dispatch(getProductCategory());
-  }, []);
-
-  // const categoryList = [
-  //   "Cookies",
-  //   "Celebration cakes",
-  //   "Dry cake",
-  //   "Savoury items(Snacks)",
-  //   "Pizza and Breads",
-  // ];
 
   const handleChange = (e) => {
     setCategoryName(e.target.value);
@@ -48,33 +32,18 @@ const Product = () => {
   }, [categoryName]);
 
   console.log("Product array", Array.isArray(products) ? products : []);
-  console.log("category list", categoryList);
+  // console.log("category list", categoryList);
 
   return (
     <div>
       <Row style={{ marginBottom: "15px" }}>
         <Col lg={6}>
-          <Form.Select
-            className="product-form"
-            name="category_name"
-            onChange={handleChange}
-          >
-            {/* <option value="default">Select a category</option> */}
-            {/* <option>Select Product category</option> */}
-            {categoryList &&
-              Array.isArray(categoryList) &&
-              categoryList.map((item) => (
-                <option key={item.id} value={item}>
-                  {" "}
-                  {item.name}{" "}
-                </option>
-              ))}
-          </Form.Select>
+          <CategoryListing handleChange={handleChange} />
         </Col>
         <Col lg={6}></Col>
       </Row>
       <Row>
-        <ProductsTable products={products} />
+        {categoryName.length > 0 && <ProductsTable products={products} />}
       </Row>
     </div>
   );
