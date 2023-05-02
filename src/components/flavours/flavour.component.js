@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, Table } from "react-bootstrap";
-import useFetchData from "../../custom-hooks/useFetchData";
+import React, { useEffect } from "react";
+import { Row, Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getAvailableFlavour } from "../../redux/products/product.action";
 
 import FlavourBody from "./flavour-table.component";
 import { Icon } from "@iconify/react";
 
 const Flavour = () => {
+  const dispatch = useDispatch();
+  const flavourListing = useSelector((state) => state.product.flavourList);
+
+  useEffect(() => {
+    dispatch(getAvailableFlavour());
+  }, []);
+
   const flavourTableHeaders = ["Variety", "descriptions"];
-  //   const [loading, setLoading] = useState(false);
-  const flavourData = useFetchData("flavours");
 
-  const { data, loading, setData } = flavourData ? flavourData : {};
-
-  console.log("list of available flavours", flavourData);
   return (
     <>
-      {loading ? (
+      {flavourListing.length === 0 ? (
         <Icon
           icon="eos-icons:bubble-loading"
           color="black"
@@ -41,7 +45,9 @@ const Flavour = () => {
               </tr>
             </thead>
             <tbody style={{ position: "relative" }}>
-              {loading && !Array.isArray(data) ? (
+              {Array.isArray(flavourListing) &&
+              flavourListing &&
+              flavourListing.length === 0 ? (
                 <Icon
                   icon="eos-icons:bubble-loading"
                   color="black"
@@ -49,14 +55,14 @@ const Flavour = () => {
                   height="20"
                 />
               ) : (
-                Array.isArray(data) &&
-                flavourData &&
-                data.map((flavour, idx) => {
+                Array.isArray(flavourListing) &&
+                flavourListing &&
+                flavourListing.map((flavour, idx) => {
                   return (
                     <FlavourBody
                       key={idx}
                       flavour={flavour}
-                      setData={setData}
+                      // setData={setFlavourList}
                     />
                   );
                 })
