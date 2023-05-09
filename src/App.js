@@ -13,6 +13,7 @@ import Error403 from "./components/error-pages-list/error403/error-403.component
 import Error500 from "./components/error-pages-list/error500/error500.component";
 import FlavourPage from "./pages/dashboard-pages/flavour-page/FlavourPage";
 import ProductPage from "./pages/dashboard-pages/product-page/ProductPage";
+import ProductDetailEditPage from "./pages/product-detail/ProductDetailEditPage";
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -33,15 +34,46 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" exact element={<HomePage />} />
-            <Route path="/shape" exact element={<ShapePage />} />
-            <Route path="/flavour" element={<FlavourPage />} />
-            <Route path="/product" element={<ProductPage />} />
+            <Route
+              path="/shape"
+              exact
+              element={
+                <ProtectedRoute>
+                  <ShapePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/flavour"
+              element={
+                <ProtectedRoute>
+                  <FlavourPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/product"
+              element={
+                <ProtectedRoute>
+                  <ProductPage />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/dashboard"
               exact
               element={
                 <ProtectedRoute>
                   <DashBoard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/editproduct/:cat_name/:title"
+              exact
+              element={
+                <ProtectedRoute>
+                  <ProductDetailEditPage />
                 </ProtectedRoute>
               }
             />

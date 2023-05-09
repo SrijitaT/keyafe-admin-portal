@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import { Modal, Placeholder, Button } from "rsuite";
+import { useNavigate } from "react-router-dom";
 
-import "rsuite/dist/rsuite.min.css"; // or
+import "rsuite/dist/rsuite.min.css";
 import ProductDetails from "../product-detail";
 
 const CustomModal = ({ open, handleClose, info }) => {
   console.log("info passed to modal", info);
+
+  const cat_name = (info && info.Category && info.Category.name) || "";
+  const title = (info && info.title) || "";
+
+  const navigate = useNavigate();
+
+  const handleEditModal = (e) => {
+    e.preventDefault();
+    navigate(`/editproduct/${cat_name}/${title}`, {
+      state: {
+        product: info,
+      },
+    });
+  };
 
   return (
     <>
@@ -24,8 +39,8 @@ const CustomModal = ({ open, handleClose, info }) => {
           <Button onClick={handleClose} appearance="primary">
             Ok
           </Button>
-          <Button onClick={handleClose} appearance="subtle">
-            Cancel
+          <Button onClick={handleEditModal} appearance="subtle">
+            Edit
           </Button>
         </Modal.Footer>
       </Modal>
