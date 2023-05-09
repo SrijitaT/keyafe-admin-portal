@@ -20,7 +20,7 @@ const ProductDetailEditPage = () => {
       </Col>
       <Col lg={10}>
         <div className="product-edit-container">
-          <span>This is product details edit page</span>
+          {/* <span>This is product details edit page</span> */}
           <EditProductDetail
             productInfo={productInfo}
             otherDetails={otherDetails}

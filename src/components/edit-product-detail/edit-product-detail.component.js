@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { getAvailableType } from "../../redux/products/product.action";
 import TypeListing from "../type-listing";
 import FlavourListing from "../flavour-listing";
+import Button from "../custom-button/custom-button.component";
 
 const EditProductDetail = ({ productInfo, otherDetails }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -17,6 +18,10 @@ const EditProductDetail = ({ productInfo, otherDetails }) => {
   };
 
   const handleChange = (e) => {
+    e.preventDefault();
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
   };
 
@@ -72,6 +77,22 @@ const EditProductDetail = ({ productInfo, otherDetails }) => {
           <FlavourListing handleChange={handleChange} />
         </Col>
         <Col lg={4}></Col>
+      </Row>
+      <br />
+      <Row>
+        <Col lg={3}>Price:</Col>
+        <Col lg={2}>
+          <span>
+            Rs{" "}
+            {productInfo.discounted_unit_price
+              ? productInfo.discounted_unit_price
+              : productInfo.discounted_unit_price}
+          </span>
+        </Col>
+      </Row>
+      <br />
+      <Row>
+        <Button onClick={handleSubmit}>Submit</Button>
       </Row>
     </>
   );
