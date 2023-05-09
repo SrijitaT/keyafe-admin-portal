@@ -65,46 +65,50 @@ const ProductDetails = ({ productInfo }) => {
           })}
         </tbody>
       </Table>
-      <h3>Other possible Weight & Price List</h3>
-      <Table responsive hover bordered>
-        <thead>
-          <tr>
-            <th>Weight</th>
-            <th>Original Price(Rs)</th>
-            <th>Discounted Price(Rs)</th>
-            <th>Serves Around</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.keys(productDescription.product_price_weight_map).map(
-            (key) => {
-              return (
-                <tr>
-                  <td>{key}</td>
-                  <td>
-                    {
-                      productDescription.product_price_weight_map[key]
-                        .original_price
-                    }
-                  </td>
-                  <td>
-                    {
-                      productDescription.product_price_weight_map[key]
-                        .discounted_price
-                    }
-                  </td>
-                  <td>
-                    {
-                      productDescription.product_price_weight_map[key]
-                        .serves_around
-                    }
-                  </td>
-                </tr>
-              );
-            }
-          )}
-        </tbody>
-      </Table>
+      {productInfo.Category.name === "Celebrations cakes" && (
+        <>
+          <h3>Other possible Weight & Price List</h3>
+          <Table responsive hover bordered>
+            <thead>
+              <tr>
+                <th>Weight</th>
+                <th>Original Price(Rs)</th>
+                <th>Discounted Price(Rs)</th>
+                <th>Serves Around</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.keys(productDescription.product_price_weight_map).map(
+                (key) => {
+                  return (
+                    <tr>
+                      <td>{key}</td>
+                      <td>
+                        {
+                          productDescription.product_price_weight_map[key]
+                            .original_price
+                        }
+                      </td>
+                      <td>
+                        {
+                          productDescription.product_price_weight_map[key]
+                            .discounted_price
+                        }
+                      </td>
+                      <td>
+                        {
+                          productDescription.product_price_weight_map[key]
+                            .serves_around
+                        }
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
+            </tbody>
+          </Table>
+        </>
+      )}
       ;
     </>
   );

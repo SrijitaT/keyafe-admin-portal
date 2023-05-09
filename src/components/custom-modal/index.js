@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "rsuite/dist/rsuite.min.css";
 import ProductDetails from "../product-detail";
 
-const CustomModal = ({ open, handleClose, info }) => {
+const CustomModal = ({ open, handleClose, info, otherProductDetails }) => {
   console.log("info passed to modal", info);
 
   const cat_name = (info && info.Category && info.Category.name) || "";
@@ -18,6 +18,7 @@ const CustomModal = ({ open, handleClose, info }) => {
     navigate(`/editproduct/${cat_name}/${title}`, {
       state: {
         product: info,
+        otherProductDetails: otherProductDetails,
       },
     });
   };
