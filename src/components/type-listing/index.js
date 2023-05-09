@@ -4,7 +4,7 @@ import { getAvailableType } from "../../redux/products/product.action";
 import { Form } from "react-bootstrap";
 import { Icon } from "@iconify/react";
 
-const ShapeListing = ({ handleChange, cat_id }) => {
+const TypeListing = ({ handleChange, cat_id }) => {
   const typeListing = useSelector((state) => state.product.typeList);
 
   const dispatch = useDispatch();
@@ -30,4 +30,4 @@ const ShapeListing = ({ handleChange, cat_id }) => {
   );
 };
 
-export default ShapeListing;
+export default TypeListing;

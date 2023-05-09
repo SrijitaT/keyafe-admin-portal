@@ -15,6 +15,13 @@ const ProductBody = ({ product }) => {
     // prod_det_id,
   } = product;
 
+  const otherProductDetails = {
+    cat_id: product.cat_id,
+    shape_id: product.shape_id,
+    type_id: product.type_id,
+    prod_det_id: product.prod_det_id,
+  };
+
   const [productInfo, setProductInfo] = useState([]);
 
   const getProductDetails = async (uid) => {
@@ -52,6 +59,7 @@ const ProductBody = ({ product }) => {
           open={openModal}
           handleClose={handleCloseModal}
           info={productInfo}
+          otherProductDetails={otherProductDetails}
         />
       ) : null}
       <tr onClick={handleProductDetails}>
