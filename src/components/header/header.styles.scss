@@ -47,11 +47,11 @@
     justify-content: flex-end;
 
     .option {
-      background-color: #eb8af4;
+      // background-color: #eb8af4;
       padding: 10px 15px;
       cursor: pointer;
       font-family: inherit;
-      font-weight: inherit;
+      font-weight: bolder;
       margin-right: 5px;
       &:hover {
         color: rgb(255, 255, 255);
@@ -69,6 +69,10 @@
 }
 
 .dropdown-option:hover {
+  text-decoration: none;
+  color: #000;
+}
+.dropdown-option:visited {
   text-decoration: none;
   color: #000;
 }

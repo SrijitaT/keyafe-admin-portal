@@ -25,15 +25,17 @@ function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (currentUser && currentUser.exp) {
-      const currentTime = Date.now() * 7200000;
-      if (currentUser.exp > currentTime || !currentUser) {
-        dispatch(signOutSuccess());
-        window.location.href = "/";
-      }
+  if (currentUser && currentUser.exp) {
+    //Check for expired token
+    const currentTime = Date.now() + 7200000;
+
+    if (currentUser.exp > currentTime || !currentUser) {
+      //logout user if token expires
+      dispatch(signOutSuccess());
+
+      window.location.href = "/";
     }
-  }, []);
+  }
 
   // useEffect(() => {
   //   dispatch(getAvailableFlavour());

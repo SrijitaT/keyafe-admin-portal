@@ -7,8 +7,10 @@ import "./product-detail-edit.styles.scss";
 
 const ProductDetailEditPage = () => {
   const location = useLocation();
-  const productInfo = location.state.product;
-  const otherDetails = location.state.otherProductDetails;
+  const productInfo = location.state.product ? location.state.product : {};
+  const otherDetails = location.state.otherProductDetails
+    ? location.state.otherProductDetails
+    : {};
 
   console.log("inside product detail edit page", productInfo);
   console.log("inside product detail edit page other details", otherDetails);

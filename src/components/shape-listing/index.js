@@ -14,11 +14,7 @@ const ShapeListing = ({ handleChange }) => {
   }, []);
 
   return (
-    <Form.Select
-      className="shape-form"
-      name="shape_name"
-      onChange={handleChange}
-    >
+    <Form.Select className="shape-form" name="shape_id" onChange={handleChange}>
       <option>Select shape</option>
       {shapeListing && Array.isArray(shapeListing) ? (
         shapeListing.map((item) => (

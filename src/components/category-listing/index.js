@@ -4,7 +4,7 @@ import { getProductCategory } from "../../redux/products/product.action";
 import { Form } from "react-bootstrap";
 import { Icon } from "@iconify/react";
 
-const CategoryListing = ({ handleChange }) => {
+const CategoryListing = ({ cat_name, handleChange }) => {
   const categoryList = useSelector((state) => state.product.categoryList);
 
   const dispatch = useDispatch();
@@ -14,12 +14,12 @@ const CategoryListing = ({ handleChange }) => {
   }, []);
 
   return (
-    <Form.Select
-      className="product-form"
-      name="category_name"
-      onChange={handleChange}
-    >
-      <option>Select Category</option>
+    <Form.Select className="product-form" name="cat_id" onChange={handleChange}>
+      {cat_name ? (
+        <option>{cat_name}</option>
+      ) : (
+        <option>Select Category</option>
+      )}
       {categoryList && Array.isArray(categoryList) ? (
         categoryList.map((item) => (
           <option key={item.id} value={item.name}>

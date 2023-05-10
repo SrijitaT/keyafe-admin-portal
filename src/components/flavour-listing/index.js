@@ -4,7 +4,7 @@ import { getAvailableFlavour } from "../../redux/products/product.action";
 import { Form } from "react-bootstrap";
 import { Icon } from "@iconify/react";
 
-const FlavourListing = ({ handleChange }) => {
+const FlavourListing = ({ flavour_name, handleChange }) => {
   const flavourListing = useSelector((state) => state.product.flavourList);
 
   const dispatch = useDispatch();
@@ -16,10 +16,14 @@ const FlavourListing = ({ handleChange }) => {
   return (
     <Form.Select
       className="flavour-form"
-      name="flavour_name"
+      name="flavour_id"
       onChange={handleChange}
     >
-      <option>Select flavour</option>
+      {flavour_name ? (
+        <option>{flavour_name}</option>
+      ) : (
+        <option>Select flavour</option>
+      )}
       {flavourListing && Array.isArray(flavourListing) ? (
         flavourListing.map((item) => (
           <option key={item.id} value={item.variety}>

@@ -20,6 +20,7 @@ const ProductBody = ({ product }) => {
     shape_id: product.shape_id,
     type_id: product.type_id,
     prod_det_id: product.prod_det_id,
+    product_id: uid,
   };
 
   const [productInfo, setProductInfo] = useState([]);

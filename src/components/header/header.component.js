@@ -65,7 +65,7 @@ export default function Header() {
               </Dropdown.Toggle>
               <Dropdown.Menu
                 style={{
-                  backgroundColor: "#eb8af4",
+                  fontWeight: "bold",
                   border: "2px solid",
                 }}
               >

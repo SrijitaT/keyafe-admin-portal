@@ -31,7 +31,10 @@ const Product = () => {
     getProductList();
   }, [categoryName]);
 
-  console.log("Product array", Array.isArray(products) ? products : []);
+  console.log(
+    "Product array",
+    Array.isArray(products) && products.length > 0 ? products : []
+  );
   // console.log("category list", categoryList);
 
   return (
