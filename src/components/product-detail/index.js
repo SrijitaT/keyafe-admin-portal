@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Row, Col, Table } from "react-bootstrap";
+import { removeEmptyKeys } from "../../utils/remove-empty-keys";
 
 const ProductDetails = ({ productInfo }) => {
-  const [productDescription, setProductDescription] = useState({
+  let [productDescription, setProductDescription] = useState({
     category_name: "",
     flavour_name: "",
     description: "",
@@ -17,17 +18,21 @@ const ProductDetails = ({ productInfo }) => {
 
   useEffect(() => {
     const { name: categoryName } =
-      productInfo && productInfo.Category ? productInfo.Category : null;
+      productInfo && productInfo.Category ? productInfo.Category : "N/A";
     const { variety: flavour } =
-      productInfo && productInfo.Flavour ? productInfo.Flavour : null;
-    const { desc, priceWeightMap } =
+      productInfo && productInfo.Flavour ? productInfo.Flavour : "N/A";
+    const { desc } =
       productInfo && productInfo.ProductDetail
         ? productInfo.ProductDetail
-        : null;
+        : "N/A";
+    const { priceWeightMap } =
+      productInfo && productInfo.ProductDetail
+        ? productInfo.ProductDetail
+        : "N/A";
     const { name: shapeName } =
-      productInfo && productInfo.Shape ? productInfo.Shape : null;
+      productInfo && productInfo.Shape ? productInfo.Shape : "N/A";
     const { name: typeName } =
-      productInfo && productInfo.Type ? productInfo.Type : null;
+      productInfo && productInfo.Type ? productInfo.Type : "N/A";
     const { discounted_unit_price, unit_price, img_url, title } = productInfo;
 
     setProductDescription((prevData) => {
@@ -46,7 +51,7 @@ const ProductDetails = ({ productInfo }) => {
       };
     });
   }, []);
-  console.log("product data", productDescription);
+
   console.log("product price map", productDescription.product_price_weight_map);
 
   return (

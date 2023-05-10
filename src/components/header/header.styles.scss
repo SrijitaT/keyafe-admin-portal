@@ -47,6 +47,7 @@
     justify-content: flex-end;
 
     .option {
+      background-color: #eb8af4;
       padding: 10px 15px;
       cursor: pointer;
       font-family: inherit;
@@ -60,4 +61,14 @@
       }
     }
   }
+}
+
+.dropdown-option {
+  text-decoration: none;
+  color: #000;
+}
+
+.dropdown-option:hover {
+  text-decoration: none;
+  color: #000;
 }

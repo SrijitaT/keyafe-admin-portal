@@ -7,11 +7,11 @@ import { signOutSuccess } from "./redux/admin/admin.action";
 import DashBoard from "./pages/dashboard-pages/DashBoard";
 import ShapePage from "./pages/dashboard-pages/shape-page/ShapePage";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getAvailableFlavour,
-  getProductCategory,
-  getAvailableShapes,
-} from "./redux/products/product.action";
+// import {
+//   getAvailableFlavour,
+//   getProductCategory,
+//   getAvailableShapes,
+// } from "./redux/products/product.action";
 import Header from "./components/header/header.component";
 import ProtectedRoute from "./components/protected-routes/protected-route.component";
 import Error404 from "./components/error-pages-list/error404/error-404.component";
@@ -35,11 +35,11 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    dispatch(getAvailableFlavour());
-    dispatch(getAvailableShapes());
-    dispatch(getProductCategory());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAvailableFlavour());
+  //   dispatch(getAvailableShapes());
+  //   dispatch(getProductCategory());
+  // }, []);
 
   return (
     <Container fluid>

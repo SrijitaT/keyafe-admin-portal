@@ -53,7 +53,7 @@ export default function Header() {
                 id="dropdown-basic"
                 style={{
                   backgroundColor: "inherit",
-                  border: "none",
+                  border: "2px solid black",
                 }}
               >
                 <Link className="dropdown-option">
@@ -63,9 +63,14 @@ export default function Header() {
                   !!
                 </Link>
               </Dropdown.Toggle>
-              <Dropdown.Menu>
+              <Dropdown.Menu
+                style={{
+                  backgroundColor: "#eb8af4",
+                  border: "2px solid",
+                }}
+              >
                 <Dropdown.Item onClick={signOutUser}>
-                  <NavLink className="option">Log Out</NavLink>
+                  <NavLink className="dropdown-option">Log Out</NavLink>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
