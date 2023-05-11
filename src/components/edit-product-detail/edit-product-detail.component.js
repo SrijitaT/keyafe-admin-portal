@@ -36,6 +36,7 @@ const EditProductDetail = ({ productInfo, otherDetails }) => {
     prod_det_id: otherDetails.prod_det_id,
     shape_id: "",
     original_flavour_id: "",
+    unit_price: "",
   });
 
   const handleFileChange = (event) => {
@@ -176,16 +177,18 @@ const EditProductDetail = ({ productInfo, otherDetails }) => {
       </Row>
       <br />
       <Row>
-        <Col lg={3}>Price:</Col>
-        <Col lg={2}>
-          <span>
-            Rs{" "}
-            {productInfo
-              ? productInfo.discounted_unit_price
-                ? productInfo.discounted_unit_price
-                : productInfo.unit_price
-              : null}
-          </span>
+        <Col lg={3} className="d-flex align-items-center">
+          Unit Price (in Rs):
+        </Col>
+        <Col lg={2} className="d-flex align-items-center">
+          <FormInput
+            label="Unit Price"
+            type="number"
+            required
+            onChange={handleChange}
+            name="unit_price"
+            value={productInfo.unit_price}
+          />
         </Col>
       </Row>
       <br />

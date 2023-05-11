@@ -70,7 +70,7 @@ const ProductDetails = ({ productInfo }) => {
           })}
         </tbody>
       </Table>
-      {productInfo.Category.name === "Celebrations cakes" && (
+      {productInfo.ProductDetail.priceWeightMap && (
         <>
           <h3>Other possible Weight & Price List</h3>
           <Table responsive hover bordered>
@@ -86,7 +86,7 @@ const ProductDetails = ({ productInfo }) => {
               {Object.keys(productDescription.product_price_weight_map).map(
                 (key) => {
                   return (
-                    <tr>
+                    <tr key={key}>
                       <td>{key}</td>
                       <td>
                         {

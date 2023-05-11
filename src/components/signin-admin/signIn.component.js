@@ -15,7 +15,7 @@ const defaultFormFields = {
   password: "",
 };
 
-const SignIn = () => {
+const SignIn = ({ onError }) => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [isLoading, setIsLoading] = useState(false);
   const { email_id, password } = formFields;
@@ -55,6 +55,9 @@ const SignIn = () => {
         setIsLoading(false);
       }
     } catch (error) {
+      if (typeof onError === "function" && error.data.type === "error") {
+        onError(error);
+      }
       console.log("error", error);
       setIsLoading(false);
       resetFormFields();
