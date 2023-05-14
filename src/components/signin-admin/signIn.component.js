@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./sign-in.styles.scss";
 import Button from "../custom-button/custom-button.component";
@@ -9,16 +9,19 @@ import { useDispatch } from "react-redux";
 import { emailPhoneSignInStart } from "../../redux/admin/admin.action";
 import axiosInterceptor from "../../utils/api/axiosInterceptor";
 import decryptToken from "../../utils/token-decryption/decryptToken";
+import { ErrorFallback } from "../error-boundary";
 
 const defaultFormFields = {
   email_id: "",
   password: "",
 };
 
-const SignIn = ({ onError }) => {
+const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [isLoading, setIsLoading] = useState(false);
   const { email_id, password } = formFields;
+  const [hasError, setHasError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const resetFormFields = () => setFormFields(defaultFormFields);
 
@@ -26,6 +29,21 @@ const SignIn = ({ onError }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleError = useCallback((error) => {
+    setHasError(true);
+    // You can also log the error to an error reporting service
+    console.error(error);
+  }, []);
+
+  if (hasError) {
+    return (
+      <ErrorFallback
+        error={errorMsg}
+        resetErrorBoundary={() => setHasError(false)}
+      />
+    );
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,10 +73,9 @@ const SignIn = ({ onError }) => {
         setIsLoading(false);
       }
     } catch (error) {
-      if (typeof onError === "function" && error.data.type === "error") {
-        onError(error);
-      }
       console.log("error", error);
+      setHasError(true);
+      setErrorMsg(error);
       setIsLoading(false);
       resetFormFields();
     }

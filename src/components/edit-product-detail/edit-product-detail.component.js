@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Table } from "react-bootstrap";
 import { Icon } from "@iconify/react";
 import CategoryListing from "../category-listing";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import TypeListing from "../type-listing";
 import FlavourListing from "../flavour-listing";
 import Button from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
+import ProductPriceWeightMapTable from "../productpriceWeightmap";
 
 const EditProductDetail = ({ productInfo, otherDetails }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -26,6 +27,12 @@ const EditProductDetail = ({ productInfo, otherDetails }) => {
   console.log("in edit product detail page", productInfo);
   console.log("in edit product detail page", otherDetails);
   //   const typeListing = useSelector((state) => state.product.typeList);
+
+  const [productPriceMapData, setProductPriceMapData] = useState(
+    productInfo.ProductDetail.priceWeightMap
+      ? productInfo.ProductDetail.priceWeightMap
+      : {}
+  );
 
   const [editProductPatchBody, setEditProductPatchBody] = useState({
     prod_id: "",
@@ -192,6 +199,35 @@ const EditProductDetail = ({ productInfo, otherDetails }) => {
         </Col>
       </Row>
       <br />
+      <Row>
+        {productPriceMapData && (
+          <>
+            <h3>Other possible Weight & Price List</h3>
+            <Table responsive hover bordered>
+              <thead>
+                <tr>
+                  <th>Weight</th>
+                  <th>Original Price(Rs)</th>
+                  <th>Discounted Price(Rs)</th>
+                  <th>Serves Around</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.keys(productPriceMapData).map((key) => {
+                  return (
+                    <tr key={key}>
+                      <td>{key}</td>
+                      <td>{productPriceMapData[key].original_price}</td>
+                      <td>{productPriceMapData[key].discounted_price}</td>
+                      <td>{productPriceMapData[key].serves_around}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </>
+        )}
+      </Row>
       <Row>
         <Button onClick={handleSubmit}>Submit</Button>
       </Row>

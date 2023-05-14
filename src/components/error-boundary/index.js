@@ -1,60 +1,49 @@
 // ErrorBoundary.js
 
-import React, { useState, useEffect } from "react";
 import Error404 from "../error-pages-list/error404/error-404.component";
 import Error403 from "../error-pages-list/error403/error-403.component";
 import Error500 from "../error-pages-list/error500/error500.component";
+import { ErrorBoundary } from "react-error-boundary";
+import Button from "../custom-button/custom-button.component";
 
-const ErrorBoundary = ({ children }) => {
-  const [error, setError] = useState(null);
-  const [hasError, setHasError] = useState(false);
+function ErrorCategory(status) {
+  console.log("status", status);
+  switch (status.status) {
+    case 400:
+      return <h3>Bad Request</h3>;
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setError({ message: "Request timed out" });
-    }, 15000);
+    case 403:
+      return <Error403 />;
+    case 404:
+      return <Error404 />;
+    case 500:
+      return <Error500 />;
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleOnError = (error, errorInfo) => {
-    setError(error);
-    console.log("error", errorInfo);
-    setHasError(true);
-  };
-
-  if (error && hasError) {
-    const { response } = error;
-    if (response && response.status) {
-      console.log("error", response);
-      // Render different fallback components based on error status code
-      switch (response.status) {
-        case 404:
-          return <Error404 />;
-        case 403:
-          return <Error403 />;
-        case 400:
-          return <Error403 />;
-        case 500:
-          return <Error500 />;
-        // Add more cases for other status codes as needed
-        //   default:
-        //     return <h1>Something went wrong.</h1>;
-      }
-    }
+    default:
+      return <h3>Oops looks like there is an error at our end</h3>;
   }
+}
 
+function ErrorFallback({ error, resetErrorBoundary }) {
+  console.log("error fallback", error);
   return (
-    <React.Fragment>
-      {/* {renderFallbackComponent()} */}
-      {React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, { onError: handleOnError });
-        }
-        return child;
-      })}
-    </React.Fragment>
-  );
-};
+    <div>
+      <ErrorCategory status={error.status} />
 
-export default ErrorBoundary;
+      <Button onClick={resetErrorBoundary}>Try Again</Button>
+    </div>
+  );
+}
+
+function ErrorBoundaryComponent({ children }) {
+  return (
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onReset={() => window.location.reload()}
+    >
+      {children}
+    </ErrorBoundary>
+  );
+}
+
+export { ErrorBoundaryComponent, ErrorFallback };
