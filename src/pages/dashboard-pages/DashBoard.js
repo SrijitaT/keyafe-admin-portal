@@ -6,10 +6,10 @@ const DashBoard = () => {
   return (
     <div>
       <Row>
-        <Col lg={3} style={{ marginBottom: "20px" }}>
+        <Col lg={2} style={{ marginBottom: "20px" }}>
           <Sidenav />
         </Col>
-        <Col lg={9}>
+        <Col lg={10}>
           <h1>Welcome to Admin Portal</h1>
         </Col>
       </Row>

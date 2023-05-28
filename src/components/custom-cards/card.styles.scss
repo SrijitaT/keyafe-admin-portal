@@ -1,0 +1,12 @@
+.info-card {
+  width: 10rem;
+  height: 8rem;
+  background-color: rgb(229, 138, 237);
+  color: #fff;
+
+  .info-card-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

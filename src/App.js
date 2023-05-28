@@ -7,6 +7,7 @@ import { signOutSuccess } from "./redux/admin/admin.action";
 import DashBoard from "./pages/dashboard-pages/DashBoard";
 import ShapePage from "./pages/dashboard-pages/shape-page/ShapePage";
 import { useSelector, useDispatch } from "react-redux";
+import { getOrders } from "./redux/orders/orders.action";
 // import {
 //   getAvailableFlavour,
 //   getProductCategory,
@@ -20,6 +21,7 @@ import Error500 from "./components/error-pages-list/error500/error500.component"
 import FlavourPage from "./pages/dashboard-pages/flavour-page/FlavourPage";
 import ProductPage from "./pages/dashboard-pages/product-page/ProductPage";
 import ProductDetailEditPage from "./pages/product-detail/ProductDetailEditPage";
+import OrderPage from "./pages/dashboard-pages/order-page/OrderPage";
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -36,6 +38,8 @@ function App() {
       window.location.href = "/";
     }
   }
+
+ 
 
   // useEffect(() => {
   //   dispatch(getAvailableFlavour());
@@ -72,6 +76,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ProductPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/orders-all"
+              element={
+                <ProtectedRoute>
+                  <OrderPage />
                 </ProtectedRoute>
               }
             />

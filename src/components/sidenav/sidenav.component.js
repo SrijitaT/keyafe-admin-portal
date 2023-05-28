@@ -4,6 +4,8 @@ import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import ShapeIcon from "@rsuite/icons/legacy/Shapes";
 import FlavourIcon from "@rsuite/icons/legacy/Flow";
 import ProductIcon from "@rsuite/icons/legacy/ProductHunt";
+import { Icon } from "@rsuite/icons";
+import { BiFoodMenu } from "react-icons/bi";
 import { Sidenav, Nav } from "rsuite";
 import "./sidenav.styles.scss";
 import "rsuite/dist/rsuite.min.css"; // or
@@ -25,7 +27,7 @@ const SideNavBar = () => {
         className="sidebar-main-wrapper"
       >
         <Sidenav.Body className="sidenav-body">
-          <Nav activeKey="1" className="sidenav-items">
+          <Nav className="sidenav-items">
             <Nav.Item
               eventKey="1"
               className={
@@ -79,6 +81,22 @@ const SideNavBar = () => {
             >
               <Link to="/product" onClick={() => setMenuSelected("product")}>
                 Product
+              </Link>
+            </Nav.Item>
+            <Nav.Item
+              eventKey="5"
+              className={
+                menuSelected == "orders-all"
+                  ? "sidenav-active-item"
+                  : "sidenav-item"
+              }
+              icon={<Icon as={BiFoodMenu} />}
+            >
+              <Link
+                to="/orders-all"
+                onClick={() => setMenuSelected("orders-all")}
+              >
+                Orders
               </Link>
             </Nav.Item>
             {/* <hr /> */}
