@@ -8,7 +8,7 @@ const CustomCard = ({ headerInfo, info }) => {
   return (
     <Card className="info-card">
       <Card.Body>
-        <Card.Title>{headerInfo}</Card.Title>
+        <Card.Title style={{ textAlign: "center" }}>{headerInfo}</Card.Title>
         {info === 0 ? (
           <Card.Text>
             <Placeholder.Paragraph />
