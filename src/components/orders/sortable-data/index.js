@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 import { Table } from "react-bootstrap";
+import OrderItems from "../order-items-body";
 
-const SortableTable = ({ data }) => {
-  const [orderData, setOrderData] = useState(data);
+const SortableTable = ({ data: OrderItem }) => {
+  const [orderData, setOrderData] = useState(OrderItem);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
 
   const handleSort = (key, customSort) => {
     let direction = "asc";
-    if (
-      sortConfig &&
-      sortConfig.key === key &&
-      sortConfig.direction === "asc"
-    ) {
+
+    if (sortConfig && sortConfig.direction === "asc") {
       direction = "desc";
     }
     setOrderData(
-      [...data].sort((a, b) => {
+      [...OrderItem].sort((a, b) => {
         if (customSort) {
           return customSort(a[key], b[key], direction);
         }
@@ -26,9 +24,11 @@ const SortableTable = ({ data }) => {
   };
 
   const defaultSort = (a, b, direction) => {
-    if (a < b) return direction === "asc" ? -1 : 1;
-    if (a > b) return direction === "asc" ? 1 : -1;
-    return 0;
+    if (typeof a === "string" && typeof b === "string") {
+      return direction === "asc" ? a.localeCompare(b) : b.localeCompare(a);
+    } else {
+      return direction === "asc" ? a - b : b - a;
+    }
   };
 
   const dateSort = (a, b, direction) => {
@@ -45,13 +45,25 @@ const SortableTable = ({ data }) => {
         <thead>
           <tr>
             <th>Order ID</th>
-            <th onClick={() => handleSort("date", dateSort)}>Order Date</th>
-            <th onClick={() => handleSort("price")}>Order Price(in Rs)</th>
+            <th onClick={() => handleSort("createdAt", dateSort)}>
+              Order Date
+            </th>
+            <th onClick={() => handleSort("total_amount_payable")}>
+              Order Price(in Rs)
+            </th>
             <th>Delivery Address</th>
-            <th onClick={() => handleSort("date", dateSort)}>Delivery Date</th>
+            <th onClick={() => handleSort("delivery_date", dateSort)}>
+              Delivery Date
+            </th>
             <th>Delivery Type</th>
           </tr>
         </thead>
+        <tbody>
+          {OrderItem.map((item) => {
+            const { uid } = item;
+            return <OrderItems item={item} key={uid} />;
+          })}
+        </tbody>
       </Table>
     </>
   );
