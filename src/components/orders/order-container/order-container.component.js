@@ -5,7 +5,8 @@ import "rsuite/dist/rsuite.min.css";
 import CustomCard from "../../custom-cards";
 import SortableTable from "../sortable-mock-data";
 
-const OrderContainer = () => {
+const OrderContainer = ({ orderData }) => {
+  console.log("in order container", orderData);
   const tableData = [
     { column1: "Value 10", column2: "Value 20", column3: "Value 30" },
     { column1: "Value 11", column2: "Value 21", column3: "Value 31" },
@@ -22,7 +23,7 @@ const OrderContainer = () => {
   return (
     <div className="order-container-wrapper">
       <div className="order-container-header-cards">
-        <CustomCard headerInfo="Total Orders" info="13" />
+        <CustomCard headerInfo="Total Orders" info={orderData?.orders.length} />
         <CustomCard headerInfo="Succesfull Delivery" info="9" />
         <CustomCard headerInfo="Orders Rejected" info="4" />
       </div>

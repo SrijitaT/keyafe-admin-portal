@@ -1,63 +1,59 @@
 import React, { useState } from "react";
-import { Table } from "rsuite";
-
-const { Column, HeaderCell, Cell } = Table;
+import { Table } from "react-bootstrap";
 
 const SortableTable = ({ data }) => {
-  const [sortColumn, setSortColumn] = useState(null);
-  const [sortType, setSortType] = useState(null);
+  const [orderData, setOrderData] = useState(data);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
 
-  const handleSortColumn = (nextSortColumn) => {
-    if (sortColumn === nextSortColumn) {
-      // Toggle sort type (asc/desc) if same column clicked
-      setSortType(sortType === "asc" ? "desc" : "asc");
-    } else {
-      // Set new sort column and default sort type (asc)
-      setSortColumn(nextSortColumn);
-      setSortType("asc");
+  const handleSort = (key, customSort) => {
+    let direction = "asc";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "asc"
+    ) {
+      direction = "desc";
     }
+    setOrderData(
+      [...data].sort((a, b) => {
+        if (customSort) {
+          return customSort(a[key], b[key], direction);
+        }
+        return defaultSort(a[key], b[key], direction);
+      })
+    );
+    setSortConfig({ key, direction });
   };
 
-  // Sort the data based on the sort column and type
-  const sortedData = [...data].sort((a, b) => {
-    if (sortColumn && sortType) {
-      const aValue = a[sortColumn];
-      const bValue = b[sortColumn];
-      if (sortType === "asc") {
-        return aValue.localeCompare(bValue);
-      } else {
-        return bValue.localeCompare(aValue);
-      }
-    }
+  const defaultSort = (a, b, direction) => {
+    if (a < b) return direction === "asc" ? -1 : 1;
+    if (a > b) return direction === "asc" ? 1 : -1;
     return 0;
-  });
+  };
+
+  const dateSort = (a, b, direction) => {
+    const dateA = new Date(a);
+    const dateB = new Date(b);
+    if (dateA < dateB) return direction === "asc" ? -1 : 1;
+    if (dateA > dateB) return direction === "asc" ? 1 : -1;
+    return 0;
+  };
 
   return (
-    <Table
-      height={400}
-      data={sortedData}
-      sortColumn={sortColumn}
-      sortType={sortType}
-      onSortColumn={handleSortColumn}
-    >
-      <Column width={200} sortable>
-        <HeaderCell>Order ID</HeaderCell>
-        <Cell dataKey="column1" />
-      </Column>
-      <Column width={200} sortable>
-        <HeaderCell>Order Details</HeaderCell>
-        <Cell dataKey="column2" />
-      </Column>
-      <Column width={200} sortable>
-        <HeaderCell>Order Status</HeaderCell>
-        <Cell dataKey="column3" />
-      </Column>
-      {/* <Column width={200} sortable>
-        <HeaderCell>Payment Details</HeaderCell>
-        <Cell dataKey="column4" />
-      </Column> */}
-      {/* Add more columns as needed */}
-    </Table>
+    <>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th onClick={() => handleSort("date", dateSort)}>Order Date</th>
+            <th onClick={() => handleSort("price")}>Order Price(in Rs)</th>
+            <th>Delivery Address</th>
+            <th onClick={() => handleSort("date", dateSort)}>Delivery Date</th>
+            <th>Delivery Type</th>
+          </tr>
+        </thead>
+      </Table>
+    </>
   );
 };
 
